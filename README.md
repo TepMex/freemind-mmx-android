@@ -1,3 +1,43 @@
+# FreeMind-MMX Android
+
+This repository contains:
+
+1. **Legacy FreeMind / FreeMind-MMX desktop sources** (`freemind/`, plus `pda/`, `flash/`, …) — preserved as the behavioral reference for the FreeMind `.mm` format and the FreeMind-MMX `.mmx` sidecar design.
+2. **A new Android application** (`android/`) — a modern Kotlin / Jetpack Compose mind-mapping client that aims for FreeMind interoperability without porting Swing UI.
+
+## Why FreeMind-MMX?
+
+FreeMind-MMX (Jiang Xin / OSSXP) improves version-control friendliness:
+
+- Writes UTF-8 text instead of numeric XML character entities for non-ASCII
+- Moves volatile attributes (`FOLDED`, `CREATED`, `MODIFIED`) into a hidden `.<name>.mmx` sidecar so expanding/collapsing nodes does not dirty the main `.mm` file
+
+See the original notes below and the archaeology report:
+[`docs/android-port-analysis.md`](docs/android-port-analysis.md).
+
+## Android application (current work)
+
+| Item | Location |
+|------|----------|
+| App + modules | [`android/`](android/) |
+| Build / test instructions | [`android/README.md`](android/README.md) |
+| Architecture decisions | [`docs/adr/`](docs/adr/) |
+| Port analysis | [`docs/android-port-analysis.md`](docs/android-port-analysis.md) |
+
+**Current status:** Milestones 1–3 are in place (skeleton, `.mm`/`.mmx` reader, interactive mind-map viewer). Editor + writer next. CI publishes a signed sideload release APK.
+
+```bash
+cd android
+./gradlew test
+./gradlew :app:assembleDebug
+```
+
+## Legacy FreeMind-MMX (desktop)
+
+The text below is retained from the upstream FreeMind-MMX README for historical context.
+
+---
+
 # FreeMind Hacking
 
 FreeMind is an open source [mind-mapping](http://en.wikipedia.org/wiki/Mind_map)
@@ -34,37 +74,7 @@ attributes, and another one is a hidden ".mmx" file, which is also a XML
 file, but only stores auxiliary node attributes (such as folded, created
 time and modified time).
 
-## Download
-
-FreeMind was hosted in a CVS repository at the early age.  when I started
-to hack, I used SVN (using vendor branch model) to manage my
-customizations, and all may hacks are in SVN feature branches.  At that
-time, to share my contributions, there are not many choices like today.
-So I host it on sourceforge.net.  Now I only use the download services
-of Source Forge, and I will upload the binaries if I still remember the
-password of source forge.
-
-* Download binaries from: [Download from SourceForge](https://sourceforge.net/projects/freemind-mmx/files/FreeMind-MMX/)
-
-## Source Code
-
-In the early 2009, I started to use Mercurial/Hg + MQ to maintain
-FreeMind-MMX.  And since 2010, I became a fun of Git, I wrote a book for
-Git in Chinese and became contributors for Git. So FreeMind-MMX
-migrated again, and my customizations are managed using Topgit finally.
-That's why you should download FreeMind-MMX here:
-
-* [FreeMind-MMX on GitHub](https://github.com/jiangxin/freemind-mmx>)
-
-There are many branches in this repo:
-
-* Branches start with 't/' are topic branches managed by Topgit.
-* "tgmaster" branch is the base where all topic branches patched against.
-* "master" branch are created from "tgmaster" branch and applied patches
-  using git-quiltimport command.  This branch will be rewind when patches
-  are changed or upstream is updated.
-
-## Build FreeMind-MMX from source
+## Build FreeMind-MMX from source (desktop)
 
 Before build FreeMind-MMX from source code, you should install JDK.
 Be sure to export a valid `JAVA_HOME`.
@@ -84,3 +94,8 @@ Then clone FreeMind-MMX from GitHub, and build.
         $ ant post
 
 3. Find build results in ../post directory, and click to install.
+
+## Source / downloads (historical)
+
+* [FreeMind-MMX on GitHub](https://github.com/jiangxin/freemind-mmx)
+* [Download binaries from SourceForge](https://sourceforge.net/projects/freemind-mmx/files/FreeMind-MMX/)

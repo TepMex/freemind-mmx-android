@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0.1">
+<!-- This .mmx files store some extra mm file attributes, which should not check in to CVS/SVN ! -->
+<node ID="root" CREATED="1000" MODIFIED="2000" FOLDED="false">
+<node ID="left1" CREATED="1100" MODIFIED="2100" FOLDED="false"/>
+<node ID="right1" CREATED="1200" MODIFIED="2200" FOLDED="false"/>
+<node ID="right1a" CREATED="1300" MODIFIED="2300" FOLDED="false"/>
+</node>
+</map>

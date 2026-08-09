@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0.1">
+<node ID="root" FOLDED="false" CREATED="10" MODIFIED="20">
+<node ID="left1" FOLDED="false" CREATED="11" MODIFIED="21"/>
+<node ID="right1" FOLDED="true" CREATED="12" MODIFIED="22"/>
+<node ID="left1a" FOLDED="false" CREATED="13" MODIFIED="23"/>
+<node ID="right1a" FOLDED="false" CREATED="14" MODIFIED="24"/>
+</node>
+</map>
