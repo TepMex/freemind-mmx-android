@@ -2,6 +2,7 @@ name: Android CI
 
 on:
   push:
+    branches: [master, "cursor/**"]
     paths:
       - "android/**"
       - ".github/workflows/android.yml"
@@ -9,6 +10,10 @@ on:
     paths:
       - "android/**"
       - ".github/workflows/android.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-test:
@@ -28,17 +33,47 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Grant Gradle wrapper execute permission
-        run: chmod +x gradlew
+      - name: Grant execute permissions
+        run: |
+          chmod +x gradlew
+          chmod +x verify-apk-sideload-cert.sh
 
       - name: Unit tests
         run: ./gradlew test --stacktrace
 
-      - name: Assemble debug APK
-        run: ./gradlew :app:assembleDebug --stacktrace
+      - name: Assemble signed release APK
+        run: ./gradlew :app:assembleRelease --stacktrace
 
-      - name: Upload debug APK
+      - name: Verify sideload signing certificate
+        run: ./verify-apk-sideload-cert.sh app/build/outputs/apk/release/app-release.apk
+
+      - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: freemind-mmx-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+
+      - name: Prepare named APK for release
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/release/app-release.apk \
+            "dist/freemind-mmx-${{ github.sha }}.apk"
+          cp app/build/outputs/apk/release/app-release.apk \
+            dist/freemind-mmx-latest.apk
+
+      - name: Publish GitHub Release (latest APK)
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-${{ github.run_number }}
+          name: FreeMind MMX Android APK (${{ github.run_number }})
+          body: |
+            Signed sideload release APK built from `${{ github.sha }}`.
+
+            Install over previous builds signed with the shared CloudAgenticCoding sideload keystore.
+          files: |
+            android/dist/freemind-mmx-latest.apk
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

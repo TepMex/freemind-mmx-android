@@ -11,7 +11,7 @@ are **not** compiled into this app.
 | Project skeleton + Material 3 shell | Done (Milestone 1) |
 | Module boundaries (core / format / layout / app) | Done |
 | Open / parse real `.mm` (+ `.mmx` join-by-ID) | Done (Milestone 2) |
-| Mind-map canvas viewer | Milestone 3 |
+| Mind-map canvas viewer (pan/zoom/select/fold) | Done (Milestone 3) |
 | Editing + undo/redo | Milestone 4 |
 | `.mm` writer + round-trip tests | Milestone 5 |
 | Full MMX save split + SAF pairing UX | Milestone 6 |
@@ -40,12 +40,16 @@ See [`docs/android-port-analysis.md`](../docs/android-port-analysis.md) and
 ```bash
 cd android
 ./gradlew :app:assembleDebug
+./gradlew :app:assembleRelease
+./verify-apk-sideload-cert.sh app/build/outputs/apk/release/app-release.apk
 ```
 
-Debug APK:
+APKs:
 
-`app/build/outputs/apk/debug/app-debug.apk`
+- Debug: `app/build/outputs/apk/debug/app-debug.apk`
+- Signed release (sideload keystore from CloudAgenticCoding): `app/build/outputs/apk/release/app-release.apk`
 
+GitHub Actions uploads the signed release APK as a workflow artifact and publishes a GitHub Release on `master` / `workflow_dispatch`.
 ## Test
 
 ```bash

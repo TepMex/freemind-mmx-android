@@ -4,26 +4,55 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+extra["sideloadPropertyPrefix"] = "freemindmmx"
+apply(from = rootProject.file("sideload-signing.gradle.kts"))
+
+val autoVersionCode: Int = extra["autoVersionCode"] as Int
+val useCustomSigning: Boolean = extra["useCustomSigning"] as Boolean
+
 android {
     namespace = "org.freemind.mmx.android"
     compileSdk = 35
+
+    signingConfigs {
+        if (useCustomSigning) {
+            create("sideload") {
+                storeFile = extra["sideloadStoreFile"] as java.io.File
+                storePassword = extra["sideloadStorePassword"] as String
+                keyAlias = extra["sideloadKeyAlias"] as String
+                keyPassword = extra["sideloadKeyPassword"] as String
+            }
+        }
+    }
 
     defaultConfig {
         applicationId = "org.freemind.mmx.android"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1.0-milestone1"
+        versionCode = autoVersionCode
+        versionName = "0.3.$autoVersionCode"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            signingConfig = if (useCustomSigning) {
+                signingConfigs.getByName("sideload")
+            } else {
+                signingConfigs.getByName("debug")
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            signingConfig = if (useCustomSigning) {
+                signingConfigs.getByName("sideload")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 

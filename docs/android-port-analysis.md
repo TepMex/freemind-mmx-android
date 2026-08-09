@@ -324,7 +324,7 @@ Rendering default: Compose `Canvas` with a viewport transform; keep layout engin
 | 0 Archaeology + this document | Done |
 | 1 Skeleton (Gradle, modules, Material 3 shell, CI docs) | Done |
 | 2 FreeMind reader | Done |
-| 3 Map viewer | Next |
+| 3 Map viewer | Done |
 | 4 Basic editor + undo | Pending |
 | 5 Writer + round-trip tests | Pending |
 | 6 MMX behavior | Partial (join implemented; split save pending) |
