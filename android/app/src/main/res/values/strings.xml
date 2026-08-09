@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FreeMind MMX</string>
-    <string name="milestone_banner">Milestone 3 — mind-map viewer (pan · zoom · select · fold)</string>
+    <string name="milestone_banner">Milestones 4–6 — edit · save · MMX</string>
     <string name="new_map">New map</string>
     <string name="open_map">Open…</string>
     <string name="save_map">Save</string>
+    <string name="add_child">Add child</string>
+    <string name="add_sibling">Add sibling</string>
+    <string name="edit_node">Edit node</string>
+    <string name="delete">Delete</string>
+    <string name="delete_node_title">Delete node?</string>
+    <string name="delete_node_message">Delete this node and all of its descendants?</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="move_up">Move up</string>
+    <string name="move_down">Move down</string>
+    <string name="toggle_side">Left/Right</string>
     <string name="status_placeholder">Create or open a FreeMind .mm map.</string>
 </resources>

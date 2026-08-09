@@ -12,10 +12,10 @@ are **not** compiled into this app.
 | Module boundaries (core / format / layout / app) | Done |
 | Open / parse real `.mm` (+ `.mmx` join-by-ID) | Done (Milestone 2) |
 | Mind-map canvas viewer (pan/zoom/select/fold) | Done (Milestone 3) |
-| Editing + undo/redo | Milestone 4 |
-| `.mm` writer + round-trip tests | Milestone 5 |
-| Full MMX save split + SAF pairing UX | Milestone 6 |
-| SAF polish, intents, recents | Milestone 7 |
+| Editing + undo/redo | Done (Milestone 4) |
+| `.mm` writer + round-trip tests | Done (Milestone 5) |
+| Full MMX save split + SAF pairing UX | Done (Milestone 6) |
+| Recents, intents polish, accessibility | Milestone 7 |
 
 See [`docs/android-port-analysis.md`](../docs/android-port-analysis.md) and
 [`docs/adr/`](../docs/adr/).

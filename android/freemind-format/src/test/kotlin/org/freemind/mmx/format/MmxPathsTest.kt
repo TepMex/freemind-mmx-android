@@ -17,21 +17,14 @@ class MmxPathsTest {
     }
 }
 
-class StubMindMapFormatTest {
+class FreeMindFormatSmokeTest {
     @Test
-    fun stubWriterStillEmitsMapXml() {
-        val stub = StubMindMapFormat()
-        val map = org.freemind.mmx.core.MindMap.blank("Root")
-        val xml = stub.writeMm(map)
-        assertTrue(xml.contains("<map"))
-        assertTrue(xml.contains("TEXT=\"Root\""))
-    }
-
-    @Test
-    fun productionFormatParsesWrittenStub() {
+    fun writeThenParsePlainMap() {
         val format = FreeMindFormat()
         val map = org.freemind.mmx.core.MindMap.blank("Root")
-        val xml = format.writeMm(map)
+        val xml = format.writeMm(map, WriteOptions(separateVolatileAttributes = false))
+        assertTrue(xml.contains("<map"))
+        assertTrue(xml.contains("TEXT=\"Root\""))
         val parsed = format.parseMm(xml)
         assertEquals("Root", parsed.root.text)
     }

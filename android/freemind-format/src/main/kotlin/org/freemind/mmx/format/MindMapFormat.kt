@@ -20,7 +20,8 @@ data class WriteOptions(
     val separateVolatileAttributes: Boolean = true,
     /** Write printable non-ASCII as UTF-8 rather than numeric entities. */
     val utf8WithoutEntities: Boolean = true,
-    val mapVersion: String = MindMap.DEFAULT_VERSION,
+    /** When null, the writer keeps [MindMap.version]. */
+    val mapVersion: String? = null,
 )
 
 object MmxPaths {

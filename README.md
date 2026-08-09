@@ -24,7 +24,7 @@ See the original notes below and the archaeology report:
 | Architecture decisions | [`docs/adr/`](docs/adr/) |
 | Port analysis | [`docs/android-port-analysis.md`](docs/android-port-analysis.md) |
 
-**Current status:** Milestones 1–3 are in place (skeleton, `.mm`/`.mmx` reader, interactive mind-map viewer). Editor + writer next. CI publishes a signed sideload release APK.
+**Current status:** Milestones 1–6 are in place (viewer, editor/undo, `.mm` writer, MMX split save). CI publishes a signed sideload release APK.
 
 ```bash
 cd android

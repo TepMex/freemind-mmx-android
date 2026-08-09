@@ -325,10 +325,10 @@ Rendering default: Compose `Canvas` with a viewport transform; keep layout engin
 | 1 Skeleton (Gradle, modules, Material 3 shell, CI docs) | Done |
 | 2 FreeMind reader | Done |
 | 3 Map viewer | Done |
-| 4 Basic editor + undo | Pending |
-| 5 Writer + round-trip tests | Pending |
-| 6 MMX behavior | Partial (join implemented; split save pending) |
-| 7 Android polish | Pending |
+| 4 Basic editor + undo | Done |
+| 5 Writer + round-trip tests | Done |
+| 6 MMX behavior | Done |
+| 7 Android polish | Next |
 
 ---
 
