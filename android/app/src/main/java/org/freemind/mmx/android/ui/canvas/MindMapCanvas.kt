@@ -44,6 +44,7 @@ fun MindMapCanvas(
     selectedNodeId: String?,
     onSelectNode: (String?) -> Unit,
     onToggleFold: (String) -> Unit,
+    onEditNode: (String) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     var scale by rememberSaveable { mutableFloatStateOf(1f) }
@@ -81,6 +82,14 @@ fun MindMapCanvas(
                         }
                         val hit = layout.nodes.lastOrNull { it.bounds.contains(world.x, world.y) }
                         onSelectNode(hit?.id)
+                    },
+                    onDoubleTap = { pos ->
+                        val world = screenToWorld(pos, viewport, size.width.toFloat(), size.height.toFloat())
+                        val hit = layout.nodes.lastOrNull { it.bounds.contains(world.x, world.y) }
+                        if (hit != null) {
+                            onSelectNode(hit.id)
+                            onEditNode(hit.id)
+                        }
                     },
                 )
             }
