@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FreeMind MMX</string>
+    <string name="milestone_banner">Milestone 1 — project skeleton</string>
+    <string name="new_map">New map</string>
+    <string name="open_map">Open…</string>
+    <string name="save_map">Save</string>
+    <string name="status_placeholder">Create or open a FreeMind .mm map. Viewer and editor land in later milestones.</string>
+</resources>
