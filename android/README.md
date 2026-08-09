@@ -4,17 +4,17 @@ Modern Android client for FreeMind-compatible mind maps, including FreeMind-MMX
 sidecar behavior. Legacy desktop FreeMind sources remain under `/freemind` and
 are **not** compiled into this app.
 
-## Status (Milestone 1)
+## Status
 
 | Capability | Status |
 |------------|--------|
-| Project skeleton + Material 3 shell | Done |
+| Project skeleton + Material 3 shell | Done (Milestone 1) |
 | Module boundaries (core / format / layout / app) | Done |
-| Open / parse real `.mm` | Milestone 2 |
+| Open / parse real `.mm` (+ `.mmx` join-by-ID) | Done (Milestone 2) |
 | Mind-map canvas viewer | Milestone 3 |
 | Editing + undo/redo | Milestone 4 |
 | `.mm` writer + round-trip tests | Milestone 5 |
-| `.mmx` join/split | Milestone 6 |
+| Full MMX save split + SAF pairing UX | Milestone 6 |
 | SAF polish, intents, recents | Milestone 7 |
 
 See [`docs/android-port-analysis.md`](../docs/android-port-analysis.md) and

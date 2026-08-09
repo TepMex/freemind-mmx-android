@@ -322,12 +322,12 @@ Rendering default: Compose `Canvas` with a viewport transform; keep layout engin
 | Milestone | Status |
 |-----------|--------|
 | 0 Archaeology + this document | Done |
-| 1 Skeleton (Gradle, modules, Material 3 shell, CI docs) | In progress |
-| 2 FreeMind reader | Next |
-| 3 Map viewer | Pending |
+| 1 Skeleton (Gradle, modules, Material 3 shell, CI docs) | Done |
+| 2 FreeMind reader | Done |
+| 3 Map viewer | Next |
 | 4 Basic editor + undo | Pending |
 | 5 Writer + round-trip tests | Pending |
-| 6 MMX behavior | Pending |
+| 6 MMX behavior | Partial (join implemented; split save pending) |
 | 7 Android polish | Pending |
 
 ---

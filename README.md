@@ -24,7 +24,7 @@ See the original notes below and the archaeology report:
 | Architecture decisions | [`docs/adr/`](docs/adr/) |
 | Port analysis | [`docs/android-port-analysis.md`](docs/android-port-analysis.md) |
 
-**Milestone 1 status:** Gradle multi-module skeleton, Material 3 shell, JVM unit tests, CI workflow. Parsing, canvas editing, and MMX I/O come next.
+**Current status:** Milestone 1 skeleton + Milestone 2 `.mm` reader (with `.mmx` join-by-ID) are in place. Canvas viewer, editor, and full writer follow.
 
 ```bash
 cd android

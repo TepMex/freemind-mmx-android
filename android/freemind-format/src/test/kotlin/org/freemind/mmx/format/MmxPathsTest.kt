@@ -19,13 +19,20 @@ class MmxPathsTest {
 
 class StubMindMapFormatTest {
     @Test
-    fun stubRoundTripProducesMapXml() {
-        val format = StubMindMapFormat()
+    fun stubWriterStillEmitsMapXml() {
+        val stub = StubMindMapFormat()
         val map = org.freemind.mmx.core.MindMap.blank("Root")
-        val xml = format.writeMm(map)
+        val xml = stub.writeMm(map)
         assertTrue(xml.contains("<map"))
         assertTrue(xml.contains("TEXT=\"Root\""))
+    }
+
+    @Test
+    fun productionFormatParsesWrittenStub() {
+        val format = FreeMindFormat()
+        val map = org.freemind.mmx.core.MindMap.blank("Root")
+        val xml = format.writeMm(map)
         val parsed = format.parseMm(xml)
-        assertEquals("Parsed stub — implement Milestone 2", parsed.root.text)
+        assertEquals("Root", parsed.root.text)
     }
 }
