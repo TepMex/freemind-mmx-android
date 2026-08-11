@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Redo
+import androidx.compose.material.icons.automirrored.filled.SubdirectoryArrowRight
 import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -55,6 +56,7 @@ import org.freemind.mmx.core.MindMapTree
 import org.freemind.mmx.layout.FreeMindLayoutEngine
 import org.freemind.mmx.layout.LayoutInput
 import org.freemind.mmx.layout.LayoutNode
+import org.freemind.mmx.layout.NodeTextMeasure
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,15 +91,15 @@ fun MindMapApp(
                 val label = node.text.ifBlank {
                     node.richContentHtml?.replace(Regex("<[^>]+>"), " ")?.trim().orEmpty()
                 }.ifBlank { "(rich)" }
-                val width = (120f + label.length * 7f).coerceIn(100f, 280f)
+                val measured = NodeTextMeasure.measure(label)
                 LayoutNode(
                     id = node.id,
                     parentId = parentId,
                     text = label,
                     folded = node.folded,
                     side = node.side?.name?.lowercase(),
-                    measuredWidth = width,
-                    measuredHeight = 40f,
+                    measuredWidth = measured.nodeWidth,
+                    measuredHeight = measured.nodeHeight,
                 )
             },
         )
@@ -201,7 +203,10 @@ fun MindMapApp(
         },
         floatingActionButton = {
             FloatingActionButton(onClick = viewModel::addChild) {
-                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add_child))
+                Icon(
+                    Icons.AutoMirrored.Filled.SubdirectoryArrowRight,
+                    contentDescription = stringResource(R.string.add_child),
+                )
             }
         },
     ) { padding ->
@@ -234,6 +239,7 @@ fun MindMapApp(
             EditorActionBar(
                 hasSelection = selected != null,
                 onEdit = viewModel::requestEditSelected,
+                onAddChild = viewModel::addChild,
                 onAddSibling = viewModel::addSibling,
                 onDelete = viewModel::requestDeleteSelected,
                 onMoveUp = { viewModel.moveSelected(-1) },
@@ -293,6 +299,7 @@ fun MindMapApp(
 private fun EditorActionBar(
     hasSelection: Boolean,
     onEdit: () -> Unit,
+    onAddChild: () -> Unit,
     onAddSibling: () -> Unit,
     onDelete: () -> Unit,
     onMoveUp: () -> Unit,
@@ -308,6 +315,12 @@ private fun EditorActionBar(
     ) {
         FilledTonalIconButton(onClick = onEdit, enabled = hasSelection) {
             Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.edit_node))
+        }
+        FilledTonalIconButton(onClick = onAddChild) {
+            Icon(
+                Icons.AutoMirrored.Filled.SubdirectoryArrowRight,
+                contentDescription = stringResource(R.string.add_child),
+            )
         }
         FilledTonalIconButton(onClick = onAddSibling, enabled = hasSelection) {
             Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add_sibling))
@@ -342,8 +355,8 @@ private fun EditNodeDialog(
                 value = text,
                 onValueChange = { text = it },
                 modifier = Modifier.fillMaxWidth(),
-                minLines = 2,
-                maxLines = 6,
+                minLines = 3,
+                maxLines = 12,
             )
         },
         confirmButton = {

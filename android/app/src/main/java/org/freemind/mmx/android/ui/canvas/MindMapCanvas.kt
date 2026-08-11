@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import org.freemind.mmx.layout.LaidOutNode
 import org.freemind.mmx.layout.LayoutResult
+import org.freemind.mmx.layout.NodeTextMeasure
 import kotlin.math.hypot
 
 data class ViewportState(
@@ -162,13 +163,18 @@ fun MindMapCanvas(
                             (textColor.green * 255).toInt(),
                             (textColor.blue * 255).toInt(),
                         )
-                        textSize = 14f
+                        textSize = NodeTextMeasure.DefaultTextSize
                         textAlign = android.graphics.Paint.Align.CENTER
                     }
-                    val label = node.text.replace('\n', ' ').let {
-                        if (it.length > 28) it.take(27) + "…" else it
+                    val measured = NodeTextMeasure.measure(node.text)
+                    val lineHeight = NodeTextMeasure.DefaultTextSize * NodeTextMeasure.LineHeightMultiplier
+                    val blockTop = node.bounds.centerY - measured.contentHeight / 2f
+                    val fm = paint.fontMetrics
+                    val baselineOffset = -(fm.ascent + fm.descent) / 2f
+                    measured.lines.forEachIndexed { index, line ->
+                        val y = blockTop + index * lineHeight + lineHeight / 2f + baselineOffset
+                        drawText(line, node.bounds.centerX, y, paint)
                     }
-                    drawText(label, node.bounds.centerX, node.bounds.centerY + 5f, paint)
                 }
 
                 if (node.hasChildren) {
