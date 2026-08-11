@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Redo
-import androidx.compose.material.icons.automirrored.filled.SubdirectoryArrowRight
 import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -22,6 +21,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.SubdirectoryArrowRight
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
@@ -204,7 +204,7 @@ fun MindMapApp(
         floatingActionButton = {
             FloatingActionButton(onClick = viewModel::addChild) {
                 Icon(
-                    Icons.AutoMirrored.Filled.SubdirectoryArrowRight,
+                    Icons.Filled.SubdirectoryArrowRight,
                     contentDescription = stringResource(R.string.add_child),
                 )
             }
@@ -318,7 +318,7 @@ private fun EditorActionBar(
         }
         FilledTonalIconButton(onClick = onAddChild) {
             Icon(
-                Icons.AutoMirrored.Filled.SubdirectoryArrowRight,
+                Icons.Filled.SubdirectoryArrowRight,
                 contentDescription = stringResource(R.string.add_child),
             )
         }
