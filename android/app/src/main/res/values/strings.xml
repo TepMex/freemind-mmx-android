@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FreeMind MMX</string>
-    <string name="milestone_banner">Milestones 4–6 — edit · save · MMX</string>
+    <string name="milestone_banner">Edit · multiline text · add child</string>
     <string name="new_map">New map</string>
     <string name="open_map">Open…</string>
     <string name="save_map">Save</string>
-    <string name="add_child">Add child</string>
+    <string name="add_child">Add child (descendant)</string>
     <string name="add_sibling">Add sibling</string>
     <string name="edit_node">Edit node</string>
     <string name="delete">Delete</string>

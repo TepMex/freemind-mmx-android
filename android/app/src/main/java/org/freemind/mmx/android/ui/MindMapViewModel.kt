@@ -179,7 +179,7 @@ class MindMapViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun addChild() {
-        val parentId = _state.value.selectedNodeId ?: return
+        val parentId = _state.value.selectedNodeId ?: _state.value.map.root.id
         val child = MindMapNode(
             id = MindMapNode.newId(),
             text = "New node",
@@ -187,6 +187,8 @@ class MindMapViewModel(application: Application) : AndroidViewModel(application)
             modifiedAtMillis = MindMapTree.nowMillis(),
         )
         applyCommand(AddChildCommand(parentId, child), selectedId = child.id, status = "Added child")
+        // FreeMind opens new nodes for immediate editing.
+        _state.update { it.copy(editingNodeId = child.id) }
     }
 
     fun addSibling() {
@@ -202,6 +204,7 @@ class MindMapViewModel(application: Application) : AndroidViewModel(application)
             modifiedAtMillis = MindMapTree.nowMillis(),
         )
         applyCommand(AddSiblingCommand(selected, child), selectedId = child.id, status = "Added sibling")
+        _state.update { it.copy(editingNodeId = child.id) }
     }
 
     fun requestDeleteSelected() {
